@@ -1,0 +1,689 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Factpl 신년회 초대장</title>
+  <style>
+    :root{
+      --bg:#0b0c10;
+      --card:#11131a;
+      --text:#f4f5f7;
+      --muted:#b8bcc6;
+      --gold:#d7b35c;
+      --gold2:#f0d28a;
+      --line:rgba(215,179,92,.25);
+      --shadow: 0 18px 50px rgba(0,0,0,.55);
+      --radius: 22px;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, "Noto Sans KR", "Apple SD Gothic Neo", "Malgun Gothic", Arial, sans-serif;
+      color:var(--text);
+      background:
+        radial-gradient(1200px 700px at 15% -10%, rgba(215,179,92,.18), transparent 55%),
+        radial-gradient(900px 600px at 90% 5%, rgba(240,210,138,.10), transparent 60%),
+        radial-gradient(1100px 800px at 50% 110%, rgba(215,179,92,.12), transparent 55%),
+        var(--bg);
+      overflow-x:hidden;
+    }
+    a{color:inherit}
+    .wrap{max-width:1040px;margin:0 auto;padding:28px 18px 56px}
+
+    /* Subtle confetti */
+    .sparkles{
+      position:fixed; inset:-40px; pointer-events:none; opacity:.65; z-index:-1;
+      background-image:
+        radial-gradient(circle at 10% 10%, rgba(215,179,92,.9) 0 2px, transparent 3px),
+        radial-gradient(circle at 40% 20%, rgba(240,210,138,.85) 0 1.6px, transparent 3px),
+        radial-gradient(circle at 70% 15%, rgba(215,179,92,.8) 0 2px, transparent 3px),
+        radial-gradient(circle at 85% 30%, rgba(240,210,138,.75) 0 1.5px, transparent 3px),
+        radial-gradient(circle at 18% 55%, rgba(240,210,138,.7) 0 1.4px, transparent 3px),
+        radial-gradient(circle at 62% 68%, rgba(215,179,92,.75) 0 1.8px, transparent 3px),
+        radial-gradient(circle at 92% 72%, rgba(215,179,92,.6) 0 1.4px, transparent 3px);
+      background-size: 360px 240px;
+      filter: blur(.1px);
+      animation: drift 14s linear infinite;
+    }
+    @keyframes drift{from{transform:translateY(-8px)} to{transform:translateY(8px)}}
+
+    header{
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: linear-gradient(180deg, rgba(17,19,26,.82), rgba(17,19,26,.62));
+      box-shadow: var(--shadow);
+      padding: 34px 24px;
+      position:relative;
+      overflow:hidden;
+    }
+    header:before{
+      content:"";
+      position:absolute; inset:-2px;
+      background:
+        radial-gradient(900px 220px at 30% 0%, rgba(215,179,92,.18), transparent 70%),
+        radial-gradient(700px 240px at 80% 20%, rgba(240,210,138,.12), transparent 65%);
+      opacity:.9;
+      pointer-events:none;
+    }
+    .hero{
+      position:relative;
+      display:grid;
+      gap: 14px;
+    }
+    .kicker{
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      color: var(--gold2);
+      letter-spacing:.06em;
+      text-transform:uppercase;
+      font-size: 12px;
+      font-weight: 700;
+    }
+    .pill{
+      border:1px solid var(--line);
+      border-radius:999px;
+      padding:6px 10px;
+      background: rgba(215,179,92,.08);
+    }
+    h1{
+      margin:0;
+      font-size: clamp(30px, 4.5vw, 52px);
+      line-height:1.08;
+      letter-spacing:-.02em;
+    }
+    .subtitle{
+      margin:0;
+      color: var(--muted);
+      font-size: clamp(15px, 2.0vw, 18px);
+      line-height:1.6;
+      max-width: 64ch;
+    }
+    .goldline{
+      height:1px; background: linear-gradient(90deg, transparent, rgba(215,179,92,.55), transparent);
+      margin-top: 10px;
+    }
+
+    .grid{
+      display:grid;
+      grid-template-columns: 1.15fr .85fr;
+      gap: 16px;
+      margin-top: 16px;
+    }
+    @media (max-width: 920px){
+      .grid{grid-template-columns: 1fr;}
+    }
+
+    .card{
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: linear-gradient(180deg, rgba(17,19,26,.76), rgba(17,19,26,.56));
+      box-shadow: var(--shadow);
+      overflow:hidden;
+    }
+    .card .hd{
+      padding: 18px 18px 10px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap: 12px;
+    }
+    .card .hd h2{
+      margin:0;
+      font-size: 16px;
+      letter-spacing:-.01em;
+      color: var(--gold2);
+    }
+    .card .bd{padding: 0 18px 18px;}
+
+    .rows{display:grid; gap: 12px; margin-top: 8px;}
+    .row{
+      display:grid;
+      grid-template-columns: 42px 1fr;
+      gap: 12px;
+      align-items:flex-start;
+      padding: 12px;
+      border-radius: 16px;
+      border: 1px solid rgba(255,255,255,.06);
+      background: rgba(255,255,255,.03);
+    }
+    .icon{
+      width:42px;height:42px;
+      display:grid;place-items:center;
+      border-radius: 14px;
+      background: rgba(215,179,92,.10);
+      border: 1px solid rgba(215,179,92,.22);
+    }
+    .label{font-size: 12px; color: var(--muted); margin: 0 0 4px;}
+    .value{margin:0; font-size: 15px; line-height:1.45;}
+
+    .actions{display:flex; flex-wrap:wrap; gap:10px; margin-top: 14px;}
+    .btn{
+      appearance:none; border:1px solid rgba(215,179,92,.30);
+      background: rgba(215,179,92,.10);
+      color: var(--text);
+      padding: 10px 12px;
+      border-radius: 14px;
+      font-weight: 700;
+      cursor:pointer;
+      transition: transform .08s ease, background .2s ease, border-color .2s ease;
+      display:inline-flex; align-items:center; gap:8px;
+      text-decoration:none;
+    }
+    .btn:hover{transform: translateY(-1px); border-color: rgba(215,179,92,.5); background: rgba(215,179,92,.14)}
+    .btn.secondary{border-color: rgba(255,255,255,.14); background: rgba(255,255,255,.04)}
+    .btn.secondary:hover{border-color: rgba(255,255,255,.22); background: rgba(255,255,255,.06)}
+
+    /* Calendar visual */
+    .calendarHero{
+      display:grid;
+      grid-template-columns: 120px 1fr;
+      gap: 14px;
+      align-items:center;
+      margin-top: 10px;
+      padding: 14px;
+      border-radius: 18px;
+      border: 1px solid rgba(215,179,92,.22);
+      background: linear-gradient(180deg, rgba(215,179,92,.10), rgba(17,19,26,.20));
+    }
+    .calendarPic{
+      width:120px; height:120px;
+      border-radius: 18px;
+      background: radial-gradient(60px 60px at 30% 25%, rgba(240,210,138,.25), transparent 60%), rgba(0,0,0,.28);
+      border: 1px solid rgba(215,179,92,.28);
+      display:grid; place-items:center;
+      overflow:hidden;
+      position:relative;
+    }
+    .calendarPic:before{
+      content:"";
+      position:absolute; inset:0;
+      background:
+        linear-gradient(180deg, rgba(215,179,92,.22), transparent 60%),
+        radial-gradient(120px 120px at 70% 0%, rgba(240,210,138,.18), transparent 60%);
+      pointer-events:none;
+      opacity:.85;
+    }
+    .calendarText{position:relative; text-align:center;}
+    .calMonth{font-weight:900; letter-spacing:.06em; color: var(--gold2); font-size: 14px; text-transform:uppercase;}
+    .calDay{font-weight:950; font-size: 44px; line-height: 1; margin-top: 6px;}
+    .calDow{color: var(--muted); font-size: 12px; margin-top: 8px;}
+
+    .mapWrap{border-radius: 18px; overflow:hidden; border:1px solid rgba(255,255,255,.10)}
+    iframe{width:100%; height: 340px; border:0}
+    @media (max-width: 520px){
+      iframe{height: 280px}
+      .calendarHero{grid-template-columns: 1fr;}
+      .calendarPic{width:100%; height: 110px;}
+      .calDay{font-size: 36px}
+    }
+
+    footer{
+      margin-top: 16px;
+      text-align:center;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.7;
+      padding: 14px 8px;
+    }
+
+    .toast{
+      position: fixed;
+      left: 50%;
+      bottom: 18px;
+      transform: translateX(-50%);
+      background: rgba(17,19,26,.92);
+      border: 1px solid rgba(255,255,255,.12);
+      border-radius: 14px;
+      padding: 10px 12px;
+      color: var(--text);
+      box-shadow: var(--shadow);
+      opacity: 0;
+      pointer-events:none;
+      transition: opacity .18s ease, transform .18s ease;
+      z-index: 30;
+      font-size: 14px;
+    }
+    .toast.show{opacity: 1; transform: translateX(-50%) translateY(-2px)}
+
+    /* Modal (RSVP + QR) */
+    .modalOverlay{
+      position: fixed; inset: 0;
+      background: rgba(0,0,0,.64);
+      backdrop-filter: blur(6px);
+      display: none;
+      z-index: 40;
+      padding: 18px;
+    }
+    .modalOverlay.show{display: grid; place-items: center;}
+    .modal{
+      width: min(560px, 100%);
+      border-radius: 22px;
+      border: 1px solid rgba(215,179,92,.26);
+      background: linear-gradient(180deg, rgba(17,19,26,.92), rgba(17,19,26,.70));
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+    .modalHd{
+      display:flex; align-items:center; justify-content:space-between; gap: 12px;
+      padding: 16px 16px 10px;
+      border-bottom: 1px solid rgba(255,255,255,.08);
+    }
+    .modalTitle{margin:0; font-size: 16px; font-weight: 900; color: var(--gold2);}
+    .modalClose{
+      appearance:none; border: 1px solid rgba(255,255,255,.16);
+      background: rgba(255,255,255,.06);
+      color: var(--text);
+      border-radius: 12px;
+      padding: 8px 10px;
+      cursor:pointer;
+      font-weight: 900;
+    }
+    .modalBd{padding: 14px 16px 16px;}
+    .modalGrid{display:grid; grid-template-columns: 1fr 220px; gap: 14px; align-items:start;}
+    .modalBox{
+      border: 1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.04);
+      border-radius: 16px;
+      padding: 12px;
+    }
+    .qrImg{width: 100%; height: auto; border-radius: 14px; border: 1px solid rgba(255,255,255,.10); background: rgba(0,0,0,.22)}
+    .linkRow{display:flex; gap: 10px; flex-wrap:wrap; margin-top: 10px;}
+
+    /* Mobile sticky actions */
+    .stickyBar{
+      position: fixed;
+      left: 50%;
+      bottom: 14px;
+      transform: translateX(-50%);
+      width: min(1040px, calc(100% - 20px));
+      display: none;
+      gap: 10px;
+      padding: 10px;
+      border-radius: 18px;
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(17,19,26,.82);
+      box-shadow: var(--shadow);
+      z-index: 35;
+    }
+    .stickyBar .btn{flex: 1; justify-content:center;}
+    @media (max-width: 920px){
+      .stickyBar{display:flex;}
+      body{padding-bottom: 86px;}
+    }
+    @media (max-width: 520px){
+      .modalGrid{grid-template-columns: 1fr;}
+    }
+  </style>
+</head>
+<body>
+  <div class="sparkles" aria-hidden="true"></div>
+
+  <main class="wrap">
+    <header>
+      <div class="hero">
+        <div class="kicker">
+          <span class="pill">INVITATION</span>
+          <span>FACTPL • 2026</span>
+        </div>
+        <h1>Factpl 신년회</h1>
+        <p class="subtitle">2026년의 첫 페이지, Factpl 신년회에서 함께 열어주세요.</p>
+        <div class="goldline"></div>
+
+        <section class="calendarHero" aria-label="행사 일정 요약">
+          <div class="calendarPic" role="img" aria-label="달력 이미지: 1월 16일 금요일">
+            <div class="calendarText">
+              <div class="calMonth">JAN</div>
+              <div class="calDay">16</div>
+              <div class="calDow">FRI • 7–9 PM</div>
+            </div>
+          </div>
+          <div>
+            <div style="font-weight:800; font-size:16px; margin-bottom:6px;">1월 16일(금) 오후 7시~9시</div>
+            <div style="color:var(--muted); line-height:1.6;">중앙일보 • 서울 마포구 상암산로 48-6</div>
+            <div class="actions" role="group" aria-label="빠른 실행">
+              <button class="btn" id="btnIcs" type="button">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <path d="M7 2v3M17 2v3" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                  <path d="M4 7h16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                  <path d="M5 5h14a2 2 0 0 1 2 2v13a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2Z" stroke="currentColor" stroke-width="2"/>
+                  <path d="M8 11h4M8 15h8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                </svg>
+                캘린더에 추가(.ics)
+              </button>
+              <button class="btn secondary" id="btnCopy" type="button">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <path d="M8 8h10v12H8z" stroke="currentColor" stroke-width="2"/>
+                  <path d="M6 16H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" stroke="currentColor" stroke-width="2"/>
+                </svg>
+                주소 복사
+              </button>
+              <a class="btn secondary" id="btnMaps" href="#" target="_blank" rel="noreferrer">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <path d="M12 21s7-4.35 7-11a7 7 0 1 0-14 0c0 6.65 7 11 7 11Z" stroke="currentColor" stroke-width="2"/>
+                  <path d="M12 10.5a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5Z" stroke="currentColor" stroke-width="2"/>
+                </svg>
+                지도에서 열기
+              </a>
+            </div>
+          </div>
+        </section>
+      </div>
+    </header>
+
+    <section class="grid" aria-label="초대장 상세 정보와 지도">
+      <div class="card">
+        <div class="hd">
+          <h2>행사 정보</h2>
+          <span class="pill" style="color:var(--muted); font-weight:800;">RSVP: 12월 31일까지</span>
+        </div>
+        <div class="bd">
+          <div class="rows">
+            <div class="row">
+              <div class="icon" aria-hidden="true">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+                  <path d="M7 2v3M17 2v3" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                  <path d="M4 7h16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                  <path d="M5 5h14a2 2 0 0 1 2 2v13a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2Z" stroke="currentColor" stroke-width="2"/>
+                </svg>
+              </div>
+              <div>
+                <p class="label">일시</p>
+                <p class="value">1월 16일(금) 오후 7시~9시</p>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="icon" aria-hidden="true">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+                  <path d="M12 21s7-4.35 7-11a7 7 0 1 0-14 0c0 6.65 7 11 7 11Z" stroke="currentColor" stroke-width="2"/>
+                  <path d="M12 10.5a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5Z" stroke="currentColor" stroke-width="2"/>
+                </svg>
+              </div>
+              <div>
+                <p class="label">장소</p>
+                <p class="value"><strong>중앙일보</strong><br/>서울 마포구 상암산로 48-6</p>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="icon" aria-hidden="true">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+                  <path d="M8 3h8l2 5-6 4-6-4 2-5Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+                  <path d="M6 8v13h12V8" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+                  <path d="M10 10l2 2 2-2" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                </svg>
+              </div>
+              <div>
+                <p class="label">드레스코드</p>
+                <p class="value">캐주얼 비즈니스</p>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="icon" aria-hidden="true">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+                  <path d="M4 7h16v12H4z" stroke="currentColor" stroke-width="2"/>
+                  <path d="m4 7 8 6 8-6" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+                </svg>
+              </div>
+              <div>
+                <p class="label">RSVP 마감</p>
+                <p class="value">12월 31일(수)까지</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="goldline"></div>
+          <p class="subtitle" style="margin-top:12px; max-width:none;">
+            함께해 주신 순간들이 Factpl의 힘이었습니다, 고맙습니다.
+          </p>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="hd">
+          <h2>오시는 길</h2>
+          <span class="pill" style="color:var(--muted); font-weight:800;">Map</span>
+        </div>
+        <div class="bd">
+          <div class="mapWrap" aria-label="지도">
+            <iframe
+              id="mapFrame"
+              loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade"
+              allowfullscreen
+              title="중앙일보 서울 마포구 상암산로 48-6 지도"
+              src="https://www.google.com/maps?q=%EC%84%9C%EC%9A%B8%20%EB%A7%88%ED%8F%AC%EA%B5%AC%20%EC%83%81%EC%95%94%EC%82%B0%EB%A1%9C%2048-6&output=embed">
+            </iframe>
+          </div>
+          <div class="actions" style="margin-top:12px;">
+            <button class="btn secondary" id="btnCopyAll" type="button">행사 정보 복사</button>
+            <button class="btn" id="btnRsvpOpen" type="button">RSVP / QR 보기</button>
+          </div>
+          <p class="label" style="margin-top:10px;">
+            * 코드에서 <code>RSVP_URL</code>만 실제 신청 링크로 바꾸면, RSVP 버튼과 QR이 자동으로 연결됩니다.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <div>Factpl New Year Party • 2026</div>
+      <div style="margin-top:6px;">필요하면 인쇄용(A4) 레이아웃/모바일용(스토리) 버전도 같은 톤으로 확장 가능합니다.</div>
+    </footer>
+  </main>
+
+  <!-- RSVP Modal -->
+  <div class="modalOverlay" id="rsvpModal" aria-hidden="true">
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="rsvpTitle">
+      <div class="modalHd">
+        <h3 class="modalTitle" id="rsvpTitle">RSVP</h3>
+        <button class="modalClose" id="btnModalClose" type="button" aria-label="닫기">닫기</button>
+      </div>
+      <div class="modalBd">
+        <div class="modalGrid">
+          <div class="modalBox">
+            <div style="font-weight:900; font-size:15px;">신청 링크</div>
+            <div class="label" style="margin-top:6px;">아래 링크를 클릭해 RSVP를 완료해 주세요.</div>
+            <div class="linkRow">
+              <a class="btn" id="btnRsvpGo" href="#" target="_blank" rel="noreferrer">RSVP 하러 가기</a>
+              <button class="btn secondary" id="btnCopyRsvp" type="button">링크 복사</button>
+            </div>
+            <div class="label" style="margin-top:10px;">마감: <strong style="color:var(--text);">12월 31일(수)까지</strong></div>
+            <div class="label" id="rsvpHint" style="margin-top:10px; display:none;">* 코드에서 <code>RSVP_URL</code>을 실제 링크로 바꾸면 버튼/QR이 자동으로 활성화됩니다.</div>
+          </div>
+          <div class="modalBox">
+            <div style="font-weight:900; font-size:15px;">QR 코드</div>
+            <div class="label" style="margin-top:6px;">모바일로 스캔해서 신청하세요.</div>
+            <img class="qrImg" id="qrImg" alt="RSVP QR 코드" />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Mobile sticky actions -->
+  <div class="stickyBar" aria-label="모바일 빠른 실행">
+    <button class="btn" id="btnStickyRsvp" type="button">RSVP / QR</button>
+    <button class="btn secondary" id="btnStickyIcs" type="button">캘린더 추가</button>
+  </div>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script>
+    // ===== Editable constants =====
+    const EVENT = {
+      title: "Factpl 신년회",
+      subtitle: "2026년의 첫 페이지, Factpl 신년회에서 함께 열어주세요.",
+      startLocal: "2026-01-16T19:00:00+09:00",
+      endLocal: "2026-01-16T21:00:00+09:00",
+      locationName: "중앙일보",
+      address: "서울 마포구 상암산로 48-6",
+      dressCode: "캐주얼 비즈니스",
+      rsvpDeadline: "12월 31일(수)까지",
+      thanks: "함께해 주신 순간들이 Factpl의 힘이었습니다, 고맙습니다.",
+      // TODO: Put your real RSVP form URL here
+      rsvpUrl: "https://docs.google.com/forms/d/e/1FAIpQLSezH8RpMzz7oPaZaEvFfRp82b9uskRF1g8vvarHdm2uAYNgFw/viewform?usp=header"
+    };
+
+    // ===== Helpers =====
+    const toastEl = document.getElementById('toast');
+    function toast(msg){
+      toastEl.textContent = msg;
+      toastEl.classList.add('show');
+      window.clearTimeout(toastEl._t);
+      toastEl._t = window.setTimeout(()=>toastEl.classList.remove('show'), 1700);
+    }
+
+    async function copyText(text){
+      try{
+        await navigator.clipboard.writeText(text);
+        toast('복사했습니다');
+      }catch{
+        const ta = document.createElement('textarea');
+        ta.value = text;
+        document.body.appendChild(ta);
+        ta.select();
+        document.execCommand('copy');
+        ta.remove();
+        toast('복사했습니다');
+      }
+    }
+
+    // ===== Map link =====
+    const mapsUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(EVENT.address)}`;
+    document.getElementById('btnMaps').href = mapsUrl;
+
+    // ===== Copy buttons =====
+    document.getElementById('btnCopy').addEventListener('click', ()=> copyText(`${EVENT.locationName} ${EVENT.address}`));
+    document.getElementById('btnCopyAll').addEventListener('click', ()=>{
+      const block = [
+        `${EVENT.title}`,
+        `${EVENT.subtitle}`,
+        `일시: 1월 16일(금) 오후 7시~9시`,
+        `장소: ${EVENT.locationName} ${EVENT.address}`,
+        `드레스코드: ${EVENT.dressCode}`,
+        `RSVP: ${EVENT.rsvpDeadline}`,
+        `${EVENT.thanks}`
+      ].join('\n');
+      copyText(block);
+    });
+
+    // ===== ICS (Add to calendar) =====
+    function toIcsDate(dt){
+      const d = new Date(dt);
+      const pad = (n)=>String(n).padStart(2,'0');
+      return (
+        d.getUTCFullYear() +
+        pad(d.getUTCMonth()+1) +
+        pad(d.getUTCDate()) + 'T' +
+        pad(d.getUTCHours()) +
+        pad(d.getUTCMinutes()) +
+        pad(d.getUTCSeconds()) + 'Z'
+      );
+    }
+
+    function downloadIcs(){
+      const uid = `factpl-ny-${Date.now()}@factpl`;
+      const dtstamp = toIcsDate(new Date().toISOString());
+      const dtstart = toIcsDate(EVENT.startLocal);
+      const dtend = toIcsDate(EVENT.endLocal);
+      const summary = EVENT.title;
+      const location = `${EVENT.locationName} ${EVENT.address}`;
+      const description = `${EVENT.subtitle}\\n\\n드레스코드: ${EVENT.dressCode}\\nRSVP 마감: ${EVENT.rsvpDeadline}`;
+
+      const ics = [
+        'BEGIN:VCALENDAR',
+        'VERSION:2.0',
+        'PRODID:-//Factpl//NewYearParty//KO',
+        'CALSCALE:GREGORIAN',
+        'METHOD:PUBLISH',
+        'BEGIN:VEVENT',
+        `UID:${uid}`,
+        `DTSTAMP:${dtstamp}`,
+        `DTSTART:${dtstart}`,
+        `DTEND:${dtend}`,
+        `SUMMARY:${summary}`,
+        `LOCATION:${location}`,
+        `DESCRIPTION:${description}`,
+        'END:VEVENT',
+        'END:VCALENDAR'
+      ].join('\r\n');
+
+      const blob = new Blob([ics], {type: 'text/calendar;charset=utf-8'});
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'Factpl_New_Year_Party.ics';
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      URL.revokeObjectURL(url);
+      toast('캘린더 파일(.ics)을 다운로드했어요');
+    }
+
+    document.getElementById('btnIcs').addEventListener('click', downloadIcs);
+    document.getElementById('btnStickyIcs').addEventListener('click', downloadIcs);
+
+    // ===== RSVP (Modal + QR) wiring =====
+    const modal = document.getElementById('rsvpModal');
+    const btnRsvpOpen = document.getElementById('btnRsvpOpen');
+    const btnStickyRsvp = document.getElementById('btnStickyRsvp');
+    const btnModalClose = document.getElementById('btnModalClose');
+    const btnRsvpGo = document.getElementById('btnRsvpGo');
+    const btnCopyRsvp = document.getElementById('btnCopyRsvp');
+    const qrImg = document.getElementById('qrImg');
+    const rsvpHint = document.getElementById('rsvpHint');
+
+    function openModal(){
+      modal.classList.add('show');
+      modal.setAttribute('aria-hidden', 'false');
+    }
+    function closeModal(){
+      modal.classList.remove('show');
+      modal.setAttribute('aria-hidden', 'true');
+    }
+
+    function setQr(url){
+      // Public QR image endpoint (no key). If you prefer, replace with your own QR generator.
+      const qr = `https://api.qrserver.com/v1/create-qr-code/?size=320x320&data=${encodeURIComponent(url)}`;
+      qrImg.src = qr;
+    }
+
+    function refreshRsvp(){
+      const ok = EVENT.rsvpUrl && EVENT.rsvpUrl !== 'RSVP_URL';
+      if(ok){
+        btnRsvpGo.href = EVENT.rsvpUrl;
+        setQr(EVENT.rsvpUrl);
+        rsvpHint.style.display = 'none';
+      } else {
+        btnRsvpGo.href = '#';
+        qrImg.removeAttribute('src');
+        rsvpHint.style.display = 'block';
+      }
+
+      btnCopyRsvp.onclick = () => {
+        if(!ok) return toast('먼저 RSVP_URL을 실제 링크로 바꿔주세요');
+        copyText(EVENT.rsvpUrl);
+      };
+
+      const openIfOk = () => {
+        if(!ok) return toast('코드에서 RSVP_URL을 실제 링크로 바꿔주세요');
+        openModal();
+      };
+
+      btnRsvpOpen.onclick = openIfOk;
+      btnStickyRsvp.onclick = openIfOk;
+    }
+
+    btnModalClose.addEventListener('click', closeModal);
+    modal.addEventListener('click', (e)=>{ if(e.target === modal) closeModal(); });
+    window.addEventListener('keydown', (e)=>{ if(e.key === 'Escape') closeModal(); });
+
+    refreshRsvp();
+  </script>
+</body>
+</html>
